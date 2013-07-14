@@ -113,4 +113,4 @@ Author: [DimitrK](http://dimitrisk.info)
 
 The library is based **havily** on the work of other people that must be aknowledged. Those are: [Paul Johnston](http://pajhome.org.uk/), [Jeremy Lin](http://www.ocf.berkeley.edu/~jjlin/jsotp/), Greg Holt, Andrew Kepert, Ydnar, Lostinet
 
-License: [BSD License](http://pajhome.org.uk/site/legal.html#bsdlicense)
+License: [BSD License](https://github.com/DimitrK/enigma/blob/master/license.txt)
