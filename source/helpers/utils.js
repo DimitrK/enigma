@@ -18,7 +18,7 @@ enyo.kind({
             }
         };
 
-        //* Returns the given argument after it encodes it to string and later to UTF-8 
+        //* Returns the given argument after it encodes it to string and later to UTF-8
         var ensureUtf8String = function(inArg) {
             return enigma.encode.toUtf8(ensureString(inArg));
         };
@@ -27,13 +27,12 @@ enyo.kind({
         /**
             source: the object of which certain properties (functions) will be extracted
             bindibgs: an array of variables which will be binded to all of the extracted properties
-            filterFn: a function which will be used to filter which properties should be extracted from source
-                      also these properties must be functions in order to be bounded.
-            context: the context on which the extracted functions will be bounded with along with the variables 
+            filterFn: a function which will be used to filter which properties should be extracted from source.
+            context: the context on which the extracted functions will be bounded with along with the variables
                      from bindings.
 
-            It is used to return a collection of functions represented as an object bounded in certain context
-            and possibly bounded with certain arguments predeclared. 
+            It is used to return an object composed of bounded functions in certain context
+            and possibly bounded with certain arguments.
         */
         var bindObjPropsWithFilter = function(source, bindings, filterFn, context) {
             var boundFns = {};
@@ -45,7 +44,7 @@ enyo.kind({
                 throw "Function expected";
             }
             for (var prop in source) {
-                if (enyo.isFunction(source[prop]) && filterFn(prop)) {
+                if (enyo.isFunction(source[prop]) && filterFn(prop, source[prop])) {
                     context = context || this;
                     enyo.forEach(bindings, function(bindArg) {
                         if (boundFns[prop]) {

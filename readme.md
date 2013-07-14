@@ -7,29 +7,30 @@ An encryption and encoding JavaScript library for [Enyo](https://github.com/enyo
 
 ### **Description**
 
-Enigma is a JavaScript library that provides encryption and encoding methods meant to be used with Enyo; a JavaScript framework focused mostly on development of mobile and tablet applications. It came to life out of my need to use some encrypted data for communication between the Enyo mobile client application and the web services I am developing and is heavily based in work of others who I mention on the end.
+Enigma is a JavaScript library that provides encryption and encoding methods meant to be used with Enyo; a JavaScript framework focused mostly on development of mobile and tablet applications. It came to life out of my need to use some encryption in data for communication between the Enyo mobile client application and the web services I am developing and is heavily based in work of others (see the end of file).
 
-The functionalities provided in this library are:
+The functionalities provided in this library are categorized as:
 
-* ** Encoding:**
+* **Encoding:**
     * Base 64
     * Hex
-    * Custom ( *Given a string representation of possible characters. Usefull for random strings generation*)
+    * Custom ( *Given a string representation of possible characters as second arguments. Usefull for random strings generation*)
     * UTF - 8
     * Little and Big Endian arrays
 * **Encryption algorithms:**
-    * MD5 (*RFC 1321 *)
-    * SHA256 (*FIPS 180-2*)
-    * SHA512 (*FIPS 180-2*)
+    * MD5 _(RFC 1321)_
+    * SHA256 _(FIPS 180-2)_
+    * SHA512 _(FIPS 180-2)_
     * RIPEMD160
-* **HMAC** (*FIPS 198*) implementations for all the above Enctyption/Hashing algorithms
+* **HMAC** _(FIPS 198)_ implementations for all the above Enctyption/Hashing algorithms
 
 
 
 
 ### **Integrating the library**
 
-As any usual Enyo library just copy the `enigma` folder to the project's `lib` directory and update the `package.js` file to point to the `enigma` folder as well. ( *The instruction applies for projects based on Enyo bootplate. The exact location you should copy the folder is subject the project's directory structure as well. *)
+If you are using [Enyo Bootplate](https://github.com/enyojs/enyo/wiki/Bootplate), as with any usual Enyo library just copy the `enigma` folder to the project's `lib` directory and update the `package.js` file to point to the `enigma` folder as well.
+In case you based your project in a different directory structure, include it wherever you see appropriate and make sure to update the nearest `package.js` file with the relative location of `enigma` folder.
 
 
 ```javascript
@@ -38,9 +39,7 @@ As any usual Enyo library just copy the `enigma` folder to the project's `lib` d
         "$lib/enigma",
         .
         .
-        "$lib/layout",
-        "App.css",
-        "App.js"
+        "$lib/layout"
     );
 
 ```
@@ -53,15 +52,15 @@ Enigma is composed mainly out of static functions so you can call it whenever ne
 ```javascript
     var aString , b64String;
     aString = "This is a string";
-    b64String = enigma.encode.toBase64(aString);
+    b64String = enigma.encode.toBase64(aString); //VGhpcyBpcyBhIHN0cmluZw==
 ```
-Available methods:
- * `.encode.toBase64`
- * `.encode.toHex`
- * `.encode.toCustom`
- * `.encode.toUtf8`
- * `.encode.toBigEndians`
- * `.encode.toLittleEndians`
+Available encoding methods:
+ * `enigma.encode.toBase64`
+ * `enigma.encode.toHex`
+ * `enigma.encode.toCustom`
+ * `enigma.encode.toUtf8`
+ * `enigma.encode.toBigEndians`
+ * `enigma.encode.toLittleEndians`
 
 * In order to encrypt a string:
 ```javascript
@@ -75,7 +74,7 @@ The available encryption methods are:
  * `enigma.rmd160`
  * `enigma.md5`
 
- The trailing `.hash()` method exists behind every available encryption and it return an object of the `Hash` instance which has as properties all the available encoding methods. So if you would like to get the Hex or the Base64 value of the generated value is enough to call `sha512Hash.toHex()` or`sha512Hash.toBase64()` or any other encoding you would like instead of the above mentioned way to use an encoding.
+ The trailing `.hash()` method exists behind every available encryption and it return an instance of`Hash` which has as properties all the available encoding methods that exist in `enigma.encode` . So if you would like to get the Hex or the Base64 value of the generated value is enough to call `sha512Hash.toHex()` or `sha512Hash.toBase64()` or any other encoding you would like. The available encodings are the same with the ones in `enigma.encode` .
 
 
 * In order to generate an HMAC from a string and some data (any kind) :
@@ -83,7 +82,7 @@ The available encryption methods are:
     var anImportantString, someData , sha512HmacHash;
     anImportantString = "password";
     someData = {message: "hi"}
-    sha512HmacHash = enigma.sha512.hmac(anImportantString, someData);
+    sha512HmacHash = enigma.sha512.hmac(anImportantString, someData); // enyo.instance {....,
 ```
 For every encoding along with the `.hash()` method mentioned before, there is the corresponding `.hmac()` as well. The `.hmac()` returns also an object which is an instance of `Hash` so the encodings are present here as well anc can be invoked in the same manner demonstrated above.
 
