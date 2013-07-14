@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Enigma tests</title>
+        <!-- -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <!-- Adjust the paths below according to your directory structure -->
+        <!-- enyo -->
+        <script src="../../../enyo/enyo.js" charset="utf-8"></script>
+        <!-- enigma -->
+        <script src="../package.js" charset="utf-8"></script>
+    </head>
+    <body class="enyo-unselectable">
+        <script>
+            document.body.appendChild(document.createTextNode("Check Console."));
+            var test = {};
+            // Expected results are based on http://online-convert.com results.
+            test.hash = {
+                sha512: {
+                    givenText: "testingenigma",
+                    expectedHexHashLowCase: "042614f11c665f86ce8d9fd9069b0d491b4bf31162f1a07ef0e8efb8f82e3154de2fe593b700baca38277012f23752a4a0030efc0158e684f444ad793a1c1a00",
+                    expectedHexHashUpperCase: "042614F11C665F86CE8D9FD9069B0D491B4BF31162F1A07EF0E8EFB8F82E3154DE2FE593B700BACA38277012F23752A4A0030EFC0158E684F444AD793A1C1A00",
+                    expectedB64Hash: "BCYU8RxmX4bOjZ/ZBpsNSRtL8xFi8aB+8OjvuPguMVTeL+WTtwC6yjgncBLyN1KkoAMO/AFY5oT0RK15OhwaAA=="
+                },
+                sha256: {
+                    givenText: "testingenigma",
+                    expectedHexHashLowCase: "dfd33ada5655d3501e25f280cddc7bd19a4d991d33e2fc4c9477623c8bc3dc20",
+                    expectedHexHashUpperCase: "DFD33ADA5655D3501E25F280CDDC7BD19A4D991D33E2FC4C9477623C8BC3DC20",
+                    expectedB64Hash: "39M62lZV01AeJfKAzdx70ZpNmR0z4vxMlHdiPIvD3CA="
+                },
+                rmd160: {
+                    givenText: "testingenigma",
+                    expectedHexHashLowCase: "4c700ffe65617d77666e84beb9e7118f8d1f553a",
+                    expectedHexHashUpperCase: "4C700FFE65617D77666E84BEB9E7118F8D1F553A",
+                    expectedB64Hash: "THAP/mVhfXdmboS+uecRj40fVTo="
+                },
+                md5: {
+                    givenText: "testingenigma",
+                    expectedHexHashLowCase: "f207eb0eff53eb6e11da40f18b39c5ab",
+                    expectedHexHashUpperCase: "F207EB0EFF53EB6E11DA40F18B39C5AB",
+                    expectedB64Hash: "8gfrDv9T624R2kDxiznFqw=="
+                }
+            };
+
+            for (var hashing in test.hash) {
+                if (test.hash.hasOwnProperty(hashing)) {
+                    
+                    var hashTestData = test.hash[hashing];
+                    var hashObj = enigma[hashing].hash(hashTestData.givenText);
+                    var hexLowActual, hexUpperActual, b64Actual;
+                    
+                    console.log(" Testing " + hashing + " encryption ");
+                    console.log("------------------------------------");
+                    
+                    console.log(" For lower-case Hex value ");
+                    enigma.config.setHexCase(0);
+                    hexLowActual = hashObj.toHex();
+                    if (enigma[hashing] && hexLowActual === hashTestData.expectedHexHashLowCase) {
+                        showSuccessResult();
+                    } else {
+                        showFailedResult(hashTestData.expectedHexHashLowCase, hexLowActual);
+                    }
+
+                    console.log(" For upper-case Hex value ");
+                    enigma.config.setHexCase(1);
+                    hexUpperActual = hashObj.toHex();
+                    if (enigma[hashing] && hexUpperActual === hashTestData.expectedHexHashUpperCase) {
+                        showSuccessResult();
+                    } else {
+                        showFailedResult(hashTestData.expectedHexHashUpperCase, hexUpperActual);
+                    }
+
+                    console.log(" For base 64 with padding ('=') value ");
+                    enigma.config.setBase64Pad("=");
+                    b64Actual = hashObj.toBase64();
+                    if (enigma[hashing] && b64Actual === hashTestData.expectedB64Hash) {
+                        showSuccessResult();
+                    } else {
+                        showFailedResult(hashTestData.expectedB64Hash, b64Actual);
+                    }
+
+                    console.log(" ");
+
+                }
+            }
+
+            function showFailedResult(expected, actual) {
+                console.warn(" Test failed. ");
+                console.debug("%c Expected: " + expected, "color:green;");
+                console.debug("%c But got: " + actual, "color:green;");
+            }
+
+            function showSuccessResult(){
+                console.log("%c Test pass. ", "color:green;");
+            }
+        </script>
+    </body>
+</html>

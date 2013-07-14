@@ -48,7 +48,7 @@ In case you based your project in a different directory structure, include it wh
 ### **Using Enigma**
 Enigma is composed mainly out of static functions so you can call it whenever needed inside the code whithout the need to instanciate it or to include it prior to the plugin.
 
-* In order to encode a string :
+* **In order to encode a string :**
 ```javascript
     var aString , b64String;
     aString = "This is a string";
@@ -62,7 +62,7 @@ Available encoding methods:
  * `enigma.encode.toBigEndians`
  * `enigma.encode.toLittleEndians`
 
-* In order to encrypt a string:
+* **In order to encrypt a string:**
 ```javascript
     var anImportantString , sha512Hash;
     anImportantString = "password";
@@ -77,14 +77,14 @@ The available encryption methods are:
  The trailing `.hash()` method exists behind every available encryption and it return an instance of`Hash` which has as properties all the available encoding methods that exist in `enigma.encode` . So if you would like to get the Hex or the Base64 value of the generated value is enough to call `sha512Hash.toHex()` or `sha512Hash.toBase64()` or any other encoding you would like. The available encodings are the same with the ones in `enigma.encode` .
 
 
-* In order to generate an HMAC from a string and some data (any kind) :
+* **In order to generate an HMAC from a string and some data (any kind) :**
 ```javascript
     var anImportantString, someData , sha512HmacHash;
     anImportantString = "password";
     someData = {message: "hi"}
     sha512HmacHash = enigma.sha512.hmac(anImportantString, someData); // enyo.instance {....,
 ```
-For every encoding along with the `.hash()` method mentioned before, there is the corresponding `.hmac()` as well. The `.hmac()` returns also an object which is an instance of `Hash` so the encodings are present here as well anc can be invoked in the same manner demonstrated above.
+For every encoding along with the `.hash()` method mentioned before, there is the corresponding `.hmac()` as well. The `.hmac()` returns also an object which is an instance of `Hash` so the encodings are present here as well and can be invoked in the same manner demonstrated above.
 
 
 ### **Configuring Enigma**
@@ -95,10 +95,10 @@ There are two configuration options used for Hexadecimal and Base64 encodings.
 ```javascript
 enigma.config.setHexCase(1);
 ```
-This setting interpretates each argument as trully or falsy and sets always 0 or 1 as value. The default value is 0 (lower-case letters )
+This setting gets and sets always 0 or 1 as value. The default value is 0 (lower-case letters )
 
 
- * **For Base64** encoding you can define chich character will be used as padding character whenever this is necessary and can be defined as follows:
+ * **For Base64** encoding you can define which character will be used as padding character whenever this is necessary and can be defined as follows:
 ```javascript
 enigma.config.setBase64Pad("=");
 ```
@@ -106,7 +106,7 @@ This setting at all cases can take only one character or an empty string. The de
 
 
 
-Keep in mind that if the configurations change during program execution, every encoding that will be called later on even on hashes generated prior to that change, the new configuration will apply.
+Keep in mind that any of these configurations change during program execution, every encoding that will be called later on - even on hashes generated prior to that change - the new configuration will apply.
 
 
 Author: [DimitrK](http://dimitrisk.info)
