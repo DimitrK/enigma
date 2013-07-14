@@ -1,0 +1,11 @@
+enyo.depends(
+    "source/enigma.js",
+    "source/helpers/utils.js",
+    "source/helpers/encode.js",
+    "source/helpers/decode.js",
+    "source/models/Hash.js",
+    "source/encryption/sha512.js",
+    "source/encryption/sha256.js",
+    "source/encryption/rmd160.js",
+    "source/encryption/md5.js"
+);
