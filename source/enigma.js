@@ -11,8 +11,7 @@ enyo.kind({
         var getBase64Pad, setBase64Pad;
 
         config = {
-            hexCase: 0,
-            /* Defined the case of the hex output. 0 - lowercase , 1 - uppercase */
+            hexCase: 0, /* Defined the case of the hex output. 0 - lowercase , 1 - uppercase */
             base64Pad: "=" /* base-64 pad character. */
         };
 

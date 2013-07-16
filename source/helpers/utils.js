@@ -1,4 +1,5 @@
 var enyo = enyo;
+var enigma = enigma;
 enyo.kind({
     name: "enigma.utils",
     kind: enyo.Component,
@@ -35,8 +36,9 @@ enyo.kind({
             and possibly bounded with certain arguments.
         */
         var bindObjPropsWithFilter = function(source, bindings, filterFn, context) {
-            var boundFns = {};
             bindings = bindings || [];
+            var boundFns = {};
+            
             if (!enyo.isArray(bindings)) {
                 throw "Array expected";
             }
