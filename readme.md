@@ -1,6 +1,6 @@
 
 ----
-## Enigma JS
+## Enigma JS ([sample](http://dimitrk.github.io/enyo/enigma))
 An encryption and encoding JavaScript library for [Enyo](https://github.com/enyojs/enyo) JS
 
 ***
