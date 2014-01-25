@@ -1,4 +1,3 @@
-
 ----
 ## Enigma JS ([sample](http://dimitrk.github.io/enyo/enigma))
 An encryption and encoding JavaScript library for [Enyo](https://github.com/enyojs/enyo) JS
@@ -83,6 +82,7 @@ The available encryption methods are:
     anImportantString = "password";
     someData = {message: "hi"}
     sha512HmacHash = enigma.sha512.hmac(anImportantString, someData); // enyo.instance {....,
+    base64Hash = sha512HmacHash.toBase64();
 ```
 For every encoding along with the `.hash()` method mentioned before, there is the corresponding `.hmac()` as well. The `.hmac()` returns also an object which is an instance of `Hash` so the encodings are present here as well and can be invoked in the same manner demonstrated above.
 
